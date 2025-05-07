@@ -25,7 +25,7 @@ def verify_token(f):
     return decorated
 
 
-def verify_agent(f):
+def verify_icer(f):
     @wraps(f)
     def decorated(*args, **kwargs):
         if not hasattr(request, 'user') or request.user.get('role') != 'agent':
