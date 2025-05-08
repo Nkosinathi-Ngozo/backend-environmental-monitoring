@@ -28,7 +28,7 @@ def verify_token(f):
 def verify_icer(f):
     @wraps(f)
     def decorated(*args, **kwargs):
-        if not hasattr(request, 'user') or request.user.get('role') != 'agent':
+        if not hasattr(request, 'user') or request.user.get('role') != 'icer':
             return jsonify({'error': 'Access denied: User is not an agent'}), 403
         return f(*args, **kwargs)
     return decorated

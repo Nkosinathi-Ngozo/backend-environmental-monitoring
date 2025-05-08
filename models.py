@@ -1,4 +1,4 @@
-from . import db
+from app.db.config import db 
 from datetime import datetime
 
 class Role(db.Model):

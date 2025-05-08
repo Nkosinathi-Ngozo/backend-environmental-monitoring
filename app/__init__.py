@@ -1,18 +1,14 @@
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
-
-db = SQLAlchemy()
+from app.db.config import init_db  # <-- import initializer
+from app.routes.authroutes import auth
+from app.routes.roleroutes import role
 
 def create_app():
     app = Flask(__name__)
 
-    # MariaDB connection string using pymysql
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://flaskuser:@Nathi123@localhost/chickencoopdb'
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    init_db(app)  # Initialize DB with config
 
-    db.init_app(app)
-
-    from .routes import main
-    app.register_blueprint(main)
+    app.register_blueprint(auth)
+    app.register_blueprint(role)
 
     return app
